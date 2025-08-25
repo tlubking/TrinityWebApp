@@ -1,0 +1,22 @@
+/* Use a stable prebuilt Material theme for core styles, then expose cheerful variables */
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+  --cheer-primary: #FFB300; /* warm gold */
+  --cheer-primary-contrast: #1b1b1b;
+  --cheer-accent: #03A9F4; /* sky blue */
+  --cheer-warn: #FF7043; /* soft orange */
+}
+
+body {
+  background: linear-gradient(180deg, #fffef8 0%, #f7fbff 100%);
+  color: var(--cheer-primary-contrast);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.mat-card {
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20,20,30,0.06);
+}
+
+.mat-form-field { width: 100%; }

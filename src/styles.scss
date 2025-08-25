@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/_material-theme.scss';
+
+/* global layout tweaks */
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+main { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; }

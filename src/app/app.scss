@@ -1,0 +1,17 @@
+/* Styles for verse rendering */
+.verse {
+	font-size: 1.05rem;
+	color: #222;
+	line-height: 1.45;
+}
+.verse-number {
+	color: #8b0000;
+	margin-right: 0.5rem;
+}
+.verse-text {
+	color: #222;
+}
+.verse-html {
+	/* ensure long verses wrap nicely */
+	white-space: pre-wrap;
+}
