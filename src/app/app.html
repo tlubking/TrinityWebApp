@@ -185,7 +185,7 @@
 <router-outlet />
 <main style="padding:1.25rem; display:flex; justify-content:center">
   <div style="width:100%; max-width:760px">
-    <h1 style="margin:0 0 0.5rem 0">Trinity Bible Viewer</h1>
+  <h1 style="margin:0 0 0.5rem 0"><span class="cross" aria-hidden="true">✝</span>Trinity Bible Viewer</h1>
     <p style="margin:0 0 1rem 0; color:#666">Select chapter and verse to view the text.</p>
 
     <!-- Material UI card with selectors -->
@@ -231,15 +231,9 @@
           <div *ngIf="error()" style="color:crimson">Error: {{ error() }}</div>
 
           <!-- Render sanitized HTML when available, otherwise show plain text -->
-          <mat-card style="margin-top:0.5rem" *ngIf="sanitizedVerseHtml()">
+          <mat-card style="margin-top:0.5rem">
             <mat-card-content>
-              <div class="verse-html" [innerHTML]="sanitizedVerseHtml()"></div>
-            </mat-card-content>
-          </mat-card>
-
-          <mat-card style="margin-top:0.5rem" *ngIf="!sanitizedVerseHtml() && verseText()">
-            <mat-card-content>
-              {{ verseText() }}
+              <verse-display [html]="sanitizedVerseHtml()" [text]="verseText()"></verse-display>
             </mat-card-content>
           </mat-card>
         </mat-card-content>

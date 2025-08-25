@@ -15,3 +15,25 @@
 	/* ensure long verses wrap nicely */
 	white-space: pre-wrap;
 }
+
+/* decorative cross near the title */
+.cross {
+	display: inline-block;
+	margin-right: 0.5rem;
+	color: #b30000;
+	font-size: 1.25rem;
+	line-height: 1;
+	transform-origin: center;
+	transform: scale(0);
+	animation: cross-pop 420ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes cross-pop {
+	0% { transform: scale(0); opacity: 0 }
+	60% { transform: scale(1.15); opacity: 1 }
+	100% { transform: scale(1); opacity: 1 }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cross { animation: none; transform: none }
+}
