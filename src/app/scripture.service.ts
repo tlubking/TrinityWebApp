@@ -10,7 +10,8 @@ interface Verse { id: string; text?: string }
 
 @Injectable({ providedIn: 'root' })
 export class ScriptureService {
-  private readonly API_BASE = 'https://localhost:7271/api/Scripture';
+  // Default to the deployed backend; change if you deploy elsewhere or use runtime config.
+  private readonly API_BASE = 'https://trinitywebapi-production.up.railway.app/api/Scripture';
   private readonly BIBLE_ID = '06125adad2d5898a-01';
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
