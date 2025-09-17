@@ -51,9 +51,9 @@
     line-height: 100%;
     letter-spacing: -0.125rem;
     margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
   p {
@@ -183,57 +183,113 @@
 </style>
 
 <router-outlet />
-<main style="padding:1.25rem; display:flex; justify-content:center">
-  <div style="width:100%; max-width:760px">
-  <h1 style="margin:0 0 0.5rem 0"><span class="cross" aria-hidden="true">✝</span>Trinity Bible Viewer</h1>
-    <p style="margin:0 0 1rem 0; color:#666">Select chapter and verse to view the text.</p>
+<main style="padding: 1.25rem; display: flex; justify-content: center">
+  <div style="width: 100%; max-width: 760px">
+    <h1 style="margin: 0 0 0.5rem 0">
+      <span class="cross" aria-hidden="true">✝</span>Trinity Bible Viewer
+    </h1>
+    <p style="margin: 0 0 1rem 0; color: #666">
+      Select chapter and verse to view the text.
+    </p>
 
     <!-- Material UI card with selectors -->
     <section>
       <mat-card>
-        <mat-card-content style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap">
-          <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; width:100%">
-            <div style="flex:1; min-width:180px">
-              <mat-form-field appearance="fill" style="width:100%">
-                <mat-label>Book</mat-label>
-                <mat-select (selectionChange)="onBookChange($event.value)">
-                  <mat-option [value]="null">-- Select Book --</mat-option>
-                  <mat-option *ngFor="let bk of books()" [value]="bk.id">{{ bk.name || bk.id }}</mat-option>
+        <mat-card-content
+          style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap"
+        >
+          <div
+            style="
+              display: flex;
+              gap: 1rem;
+              align-items: center;
+              flex-wrap: wrap;
+              width: 100%;
+            "
+          >
+            <div style="min-width: 160px">
+              <mat-form-field appearance="fill" style="width: 160px">
+                <mat-label>Bible</mat-label>
+                <mat-select
+                  [value]="selectedBible()"
+                  (selectionChange)="onBibleChange($event.value)"
+                >
+                  <mat-option
+                    *ngFor="let b of bibleVersions; trackBy: trackById"
+                    [value]="b.id"
+                    >{{ b.abbreviation || b.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
             </div>
 
-            <div style="min-width:140px">
-              <mat-form-field appearance="fill" style="width:140px">
+            <div style="flex: 1; min-width: 180px">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Book</mat-label>
+                <mat-select (selectionChange)="onBookChange($event.value)">
+                  <mat-option [value]="null">-- Select Book --</mat-option>
+                  <mat-option
+                    *ngFor="let bk of books(); trackBy: trackById"
+                    [value]="bk.id"
+                    >{{ bk.name || bk.id }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div style="min-width: 140px">
+              <mat-form-field appearance="fill" style="width: 140px">
                 <mat-label>Chapter</mat-label>
                 <mat-select (selectionChange)="onChapterChange($event.value)">
                   <mat-option [value]="null">-- Select chapter --</mat-option>
-                  <mat-option *ngFor="let c of chapters()" [value]="c.id">{{ c.number || c.id }}</mat-option>
+                  <mat-option
+                    *ngFor="let c of chapters(); trackBy: trackById"
+                    [value]="c.id"
+                    >{{ c.number || c.id }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
 
-          <mat-form-field appearance="fill" style="min-width:140px">
+          <mat-form-field appearance="fill" style="min-width: 140px">
             <mat-label>Verse</mat-label>
             <mat-select (selectionChange)="onVerseChange($event.value)">
               <mat-option [value]="null">-- Select verse --</mat-option>
-              <mat-option *ngFor="let v of verses()" [value]="v.id">{{ v.id }}</mat-option>
+              <mat-option
+                *ngFor="let v of verses(); trackBy: trackById"
+                [value]="v.id"
+                >{{ v.id }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
 
-          <div style="margin-left:auto; display:flex; align-items:center; gap:0.5rem">
-            <mat-progress-spinner *ngIf="loading()" mode="indeterminate" diameter="24"></mat-progress-spinner>
+          <div
+            style="
+              margin-left: auto;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            "
+          >
+            <mat-progress-spinner
+              *ngIf="loading()"
+              mode="indeterminate"
+              diameter="24"
+            ></mat-progress-spinner>
           </div>
         </mat-card-content>
 
         <mat-card-content>
-          <div *ngIf="error()" style="color:crimson">Error: {{ error() }}</div>
+          <div *ngIf="error()" style="color: crimson">Error: {{ error() }}</div>
 
           <!-- Render sanitized HTML when available, otherwise show plain text -->
-          <mat-card style="margin-top:0.5rem">
+          <mat-card style="margin-top: 0.5rem">
             <mat-card-content>
-              <verse-display [html]="sanitizedVerseHtml()" [text]="verseText()"></verse-display>
+              <verse-display
+                [html]="sanitizedVerseHtml()"
+                [text]="verseText()"
+              ></verse-display>
             </mat-card-content>
           </mat-card>
         </mat-card-content>
