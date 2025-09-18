@@ -104,8 +104,6 @@ export class App implements OnInit {
     });
   }
 
-  // theme toggle removed per user request
-
   private fetchChapters(): void {
     this.loading.set(true);
     this.error.set(null);
