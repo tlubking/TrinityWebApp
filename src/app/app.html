@@ -1,12 +1,3 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
@@ -208,17 +199,15 @@
             "
           >
             <div style="min-width: 160px">
-              <mat-form-field appearance="fill" style="width: 160px">
+              <mat-form-field appearance="fill" style="width: 210px">
                 <mat-label>Bible</mat-label>
                 <mat-select
                   [value]="selectedBible()"
                   (selectionChange)="onBibleChange($event.value)"
                 >
-                  <mat-option
-                    *ngFor="let b of bibleVersions; trackBy: trackById"
-                    [value]="b.id"
-                    >{{ b.abbreviation || b.name }}</mat-option
-                  >
+                  @for (b of bibleVersions; track b.id) {
+                  <mat-option [value]="b.id">{{ b.name }}</mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </div>
@@ -236,20 +225,20 @@
                 </mat-select>
               </mat-form-field>
             </div>
+          </div>
 
-            <div style="min-width: 140px">
-              <mat-form-field appearance="fill" style="width: 140px">
-                <mat-label>Chapter</mat-label>
-                <mat-select (selectionChange)="onChapterChange($event.value)">
-                  <mat-option [value]="null">-- Select chapter --</mat-option>
-                  <mat-option
-                    *ngFor="let c of chapters(); trackBy: trackById"
-                    [value]="c.id"
-                    >{{ c.number || c.id }}</mat-option
-                  >
-                </mat-select>
-              </mat-form-field>
-            </div>
+          <div style="min-width: 140px">
+            <mat-form-field appearance="fill" style="width: 140px">
+              <mat-label>Chapter</mat-label>
+              <mat-select (selectionChange)="onChapterChange($event.value)">
+                <mat-option [value]="null">-- Select chapter --</mat-option>
+                <mat-option
+                  *ngFor="let c of chapters(); trackBy: trackById"
+                  [value]="c.id"
+                  >{{ c.number || c.id }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
           </div>
 
           <mat-form-field appearance="fill" style="min-width: 140px">
