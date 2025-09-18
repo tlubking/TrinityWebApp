@@ -206,7 +206,7 @@
                   (selectionChange)="onBibleChange($event.value)"
                 >
                   @for (b of bibleVersions; track b.id) {
-                  <mat-option [value]="b.id">{{ b.name }}</mat-option>
+                  <mat-option [value]="b.name">{{ b.name }}</mat-option>
                   }
                 </mat-select>
               </mat-form-field>
