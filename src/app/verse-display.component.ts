@@ -12,6 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 
     <div *ngIf="!html && text" class="verse-text">
       <span class="verse-content">{{ text }}</span>
+    </div>
+
+    <!-- Action button (currently only a disabled save button) -->
+    <div class="verse-actions">
       <button
         type="button"
         class="save-btn"
@@ -65,6 +69,10 @@ import { MatButtonModule } from '@angular/material/button';
       .save-btn mat-icon {
         font-size: 20px;
         line-height: 20px;
+      }
+
+      .verse-actions {
+        margin-top: 0.5rem;
       }
     `,
   ],
