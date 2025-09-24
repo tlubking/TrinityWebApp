@@ -9,15 +9,16 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [CommonModule, MatIconModule, MatButtonModule],
   template: `
     <div *ngIf="html" class="verse-html" [innerHTML]="html"></div>
-    <div *ngIf="!html && text" class="verse-text">{{ text }}</div>
 
-    <div class="verse-actions">
+    <div *ngIf="!html && text" class="verse-text">
+      <span class="verse-content">{{ text }}</span>
       <button
         type="button"
         class="save-btn"
         mat-icon-button
         disabled
         aria-label="Save"
+        title="Save (disabled)"
       >
         <mat-icon>save</mat-icon>
       </button>
@@ -25,28 +26,22 @@ import { MatButtonModule } from '@angular/material/button';
   `,
   styles: [
     `
-      .verse-html {
-        white-space: pre-wrap;
-        font-size: 1.05rem;
-      }
       .verse-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-size: 1.05rem;
         white-space: pre-wrap;
       }
-      .verse-number {
-        color: #8b0000;
-        margin-right: 0.5rem;
+
+      .verse-content {
+        flex: 1 1 auto;
       }
 
-      .verse-actions {
-        margin-top: 0.75rem;
-      }
-
-      /* Icon-only save button: fixed square, subtle border, raised look */
       .save-btn {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
         padding: 0;
         display: inline-flex;
         align-items: center;
@@ -54,15 +49,12 @@ import { MatButtonModule } from '@angular/material/button';
 
         background: #1976d2;
         color: #fff;
-
         border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 6px;
-
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
         transition: box-shadow 120ms ease, transform 120ms ease;
       }
 
-      /* Slightly less elevated when disabled, still visually distinct */
       .save-btn[disabled] {
         opacity: 0.9;
         filter: grayscale(6%);
@@ -70,7 +62,6 @@ import { MatButtonModule } from '@angular/material/button';
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
       }
 
-      /* Icon sizing */
       .save-btn mat-icon {
         font-size: 20px;
         line-height: 20px;
@@ -79,6 +70,6 @@ import { MatButtonModule } from '@angular/material/button';
   ],
 })
 export class VerseDisplay {
-  @Input() html: any | null = null; // SafeHtml or null
+  @Input() html: any | null = null;
   @Input() text: string | null = null;
 }
