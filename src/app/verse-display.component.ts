@@ -15,7 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
     </div>
 
     <!-- Action button (currently only a disabled save button) -->
-    <div class="verse-actions">
+    <div
+      class="verse-actions"
+      style="justify-content: flex-end; display: flex;"
+    >
       <button
         type="button"
         class="save-btn"
@@ -51,7 +54,7 @@ import { MatButtonModule } from '@angular/material/button';
         align-items: center;
         justify-content: center;
 
-        background: #1976d2;
+        background: var(--gray-400);
         color: #fff;
         border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 6px;
