@@ -272,8 +272,9 @@
         </mat-card-content>
 
         <mat-card-content>
-          <div *ngIf="error()" style="color: crimson">Error: {{ error() }}</div>
-
+          @if (error()) {
+          <div style="color: crimson">Error: {{ error() }}</div>
+          }
           <!-- Render sanitized HTML when available, otherwise show plain text -->
           <mat-card style="margin-top: 0.5rem">
             <mat-card-content>

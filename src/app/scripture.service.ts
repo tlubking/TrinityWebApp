@@ -4,6 +4,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { BIBLE_VERSIONS, getDefaultBibleVersion } from './bible-versions';
+import { environment } from '../environments/environment.dev';
 
 interface Book {
   id: string;
@@ -21,8 +22,9 @@ interface Verse {
 
 @Injectable({ providedIn: 'root' })
 export class ScriptureService {
-  // Default to the deployed backend; change if you deploy elsewhere or use runtime config.
+  // prefer environment value, fallback to hardcoded prod
   private readonly API_BASE =
+    (environment && environment.apiBase) ||
     'https://trinitywebapi-production.up.railway.app/api/Scripture';
 
   // Default API bible id (resolved from our versions list). Keeps backwards compatibility
